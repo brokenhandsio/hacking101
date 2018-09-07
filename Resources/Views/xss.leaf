@@ -1,0 +1,24 @@
+#set("content") {
+
+  <h1>XSS</h1>
+  <h2>Cross Site Scripting</h2>
+
+  #if(count(messages) > 0) {
+    <h3>Messages</h3>
+
+    #for(message in messages) {
+      <p>#raw(message.text)</p>
+    }
+  }
+
+  <form method="POST">
+    <div class="form-group">
+      <label for="text">New Message</label>
+      <input type="text" name="text" class="form-control" id="text"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+}
+
+#embed("base")
