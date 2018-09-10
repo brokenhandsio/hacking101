@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Auth",
+        "repositoryURL": "https://github.com/vapor/auth.git",
+        "state": {
+          "branch": null,
+          "revision": "90868627c7587ea207c0b6d4054265e68f6a33ef",
+          "version": "2.0.1"
+        }
+      },
+      {
         "package": "Console",
         "repositoryURL": "https://github.com/vapor/console.git",
         "state": {
@@ -188,6 +197,15 @@
           "branch": null,
           "revision": "54632a6c1e7ecd9923c0d00b612de936de1c4745",
           "version": "3.0.8"
+        }
+      },
+      {
+        "package": "VaporSecurityHeaders",
+        "repositoryURL": "https://github.com/brokenhandsio/VaporSecurityHeaders.git",
+        "state": {
+          "branch": null,
+          "revision": "a4435a84ce1ed5558e66783d4a14e4b758b09309",
+          "version": "2.0.0"
         }
       },
       {

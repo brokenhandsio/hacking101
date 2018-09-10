@@ -20,6 +20,8 @@ struct WebsiteController: RouteCollection {
         let message = try req.content.syncDecode(Message.self)
         return message.save(on: req).transform(to: req.redirect(to: "/xss"))
     }
+
+    
 }
 
 struct IndexContext: Encodable {
