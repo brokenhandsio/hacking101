@@ -2,16 +2,9 @@
 
   <h1>This is a bad site</h1>
 
-  <a href="#" onclick="sendRequest()">Transfer Money To Me!</a>
-
-  <script>
-    var sendRequest = function() {
-      var xhttp = new XMLHttpRequest();
-      xhttp.open("POST", "http://localhost:8080/bank/transfer", true);
-      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send("");
-    \}
-  </script>
+  <form method="post" action="http://localhost:8080/bank/transfer">
+    <button type="submit" class="btn btn-link">Transfer Money To Me!</button>
+  </form>
 }
 
 #embed("base")
