@@ -1,0 +1,19 @@
+#set("content") {
+
+  <h1>Transfer Money</h1>
+
+  <form method="post">
+    <div class="form-group">
+      <label for="toAccount">Account Number to transfer to</label>
+      <input type="text" name="toAccount" class="form-control" id="toAccount"/>
+    </div>
+
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <input type="text" name="amount" class="form-control" placeholder="$" id="amount"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Transfer</button>
+  </form>
+}
+
+#embed("base")

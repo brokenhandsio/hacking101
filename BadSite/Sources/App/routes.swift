@@ -2,11 +2,11 @@ import Vapor
 
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
-    router.get { req -> Future<View> in
-        return try req.view().render("index", IndexContext())
+    router.get("csrfAttack") { req -> Future<View> in
+        return try req.view().render("csrfAttack", CSRFAttackContext())
     }
 }
 
-struct IndexContext: Encodable {
+struct CSRFAttackContext: Encodable {
     let title = "Homepage"
 }

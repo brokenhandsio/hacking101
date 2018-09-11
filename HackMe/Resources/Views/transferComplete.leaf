@@ -1,0 +1,10 @@
+#set("content") {
+
+  <h1>Transfer Complete!</h1>
+
+  <h2>Thank you!</h2>
+
+  <p>You have sent $#(amount) to #(toAccount)</p>
+}
+
+#embed("base")
