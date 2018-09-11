@@ -1,6 +1,7 @@
 import FluentSQLite
 import Vapor
 import Leaf
+import VaporSecurityHeaders
 
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
@@ -20,11 +21,18 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
 
     config.prefer(MemoryKeyedCache.self, for: KeyedCache.self)
 
+    /// Security headers
+    let cspValue = "default-src * 'unsafe-inline'"
+    let cspConfig = ContentSecurityPolicyConfiguration(value: cspValue)
+    let securityHeadersMiddlewareFactory = SecurityHeadersFactory().with(contentSecurityPolicy: cspConfig)
+    services.register(securityHeadersMiddlewareFactory.build())
+
     /// Register middleware
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
     middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
     middlewares.use(SessionsMiddleware.self)
+    middlewares.use(SecurityHeaders.self)
     services.register(middlewares)
 
     // Configure a SQLite database
