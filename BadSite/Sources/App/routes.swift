@@ -15,6 +15,10 @@ public func routes(_ router: Router) throws {
         let cookieImage = try req.make(DirectoryConfig.self).workDir + "cookie-monster.png"
         return try req.streamFile(at: cookieImage)
     }
+
+    router.get("login") { req -> Future<View> in
+        return try req.view().render("login")
+    }
 }
 
 struct CSRFAttackContext: Encodable {
