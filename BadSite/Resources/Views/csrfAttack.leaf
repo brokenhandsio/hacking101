@@ -1,0 +1,5 @@
+#set("content") {
+  <h1>This is a bad site</h1>
+}
+
+#embed("base")
