@@ -12,9 +12,6 @@ struct SearchController: RouteCollection {
         }
 
         return req.withPooledConnection(to: .psql) { conn in
-//                ///     conn.raw("SELECT * FROM planets WHERE name = ?")
-//                ///         .bind("Earth")
-//                ///         .all(decoding: Planet.self)
             var rows: [String] = []
             return conn.simpleQuery("SELECT * FROM \"User\" WHERE name = '\(nameToSearchFor)'") { row in
                 rows.append(row.description)

@@ -45,16 +45,12 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     middlewares.use(SecurityHeaders.self)
     services.register(middlewares)
 
-    // Configure a SQLite database
-//    let sqlite = try SQLiteDatabase(storage: .memory)
-
     /// Register the configured SQLite database to the database config.
     var databases = DatabasesConfig()
 
     let databaseConfig = PostgreSQLDatabaseConfig(hostname: "localhost", username: "vapor", database: "vapor", password: "password")
     let database = PostgreSQLDatabase(config: databaseConfig)
 
-    databases.enableLogging(on: .psql)
     databases.add(database: database, as: .psql)
 
     services.register(databases)
