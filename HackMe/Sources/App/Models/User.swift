@@ -1,6 +1,6 @@
 import Foundation
 import Vapor
-import FluentSQLite
+import FluentPostgreSQL
 import Authentication
 
 final class User: Codable {
@@ -18,7 +18,7 @@ final class User: Codable {
     }
 }
 
-extension User: SQLiteModel {}
+extension User: PostgreSQLModel {}
 extension User: Content {}
 extension User: Migration {}
 
@@ -31,9 +31,9 @@ extension User: BasicAuthenticatable {
 
 struct DefaultUser: Migration {
 
-    typealias Database = SQLiteDatabase
+    typealias Database = PostgreSQLDatabase
 
-    static func prepare(on connection: SQLiteConnection) -> Future<Void> {
+    static func prepare(on connection: PostgreSQLConnection) -> Future<Void> {
         let password = try? BCrypt.hash("password")
         guard let hashedPassword = password else {
             fatalError("Failed to create admin user")
@@ -42,16 +42,16 @@ struct DefaultUser: Migration {
         return user.save(on: connection).transform(to: ())
     }
 
-    static func revert(on connection: SQLiteConnection) -> Future<Void> {
+    static func revert(on connection: PostgreSQLConnection) -> Future<Void> {
         return Future.map(on: connection) {}
     }
 }
 
 struct SecondUser: Migration {
 
-    typealias Database = SQLiteDatabase
+    typealias Database = PostgreSQLDatabase
 
-    static func prepare(on connection: SQLiteConnection) -> Future<Void> {
+    static func prepare(on connection: PostgreSQLConnection) -> Future<Void> {
         let password = try? BCrypt.hash("password")
         guard let hashedPassword = password else {
             fatalError("Failed to create admin user")
@@ -60,7 +60,7 @@ struct SecondUser: Migration {
         return user.save(on: connection).transform(to: ())
     }
 
-    static func revert(on connection: SQLiteConnection) -> Future<Void> {
+    static func revert(on connection: PostgreSQLConnection) -> Future<Void> {
         return Future.map(on: connection) {}
     }
 }

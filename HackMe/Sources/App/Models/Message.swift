@@ -1,5 +1,5 @@
 import Vapor
-import FluentSQLite
+import FluentPostgreSQL
 
 final class Message: Codable {
     var id: Int?
@@ -10,5 +10,5 @@ final class Message: Codable {
     }
 }
 
-extension Message: SQLiteModel {}
+extension Message: PostgreSQLModel {}
 extension Message: Migration {}

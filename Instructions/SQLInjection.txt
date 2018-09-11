@@ -1,2 +1,6 @@
+# SQLite
+
 User' OR 1=1 OR name='something
 User'; SELECT name FROM my_db.sqlite_master WHERE type='table
+
+# Postgres
