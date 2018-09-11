@@ -26,14 +26,9 @@
         <li class="nav-item #if(title == "Transfer Money"){active}">
           <a href="/bank/transfer" class="nav-link">CSRF</a>
         </li>
-        <li class="nav-item #if(title == "Create An Acronym"){active}">
-          <a href="/acronyms/create" class="nav-link">Create An Acronym</a>
+        <li class="nav-item #if(title == "SQL Injection"){active}">
+          <a href="/search" class="nav-link">SQL Injection</a>
         </li>
-        #if(!userLoggedIn) {
-          <li class="nav-item #if(title == "Register"){active}">
-            <a href="/register" class="nav-link">Register</a>
-          </li>
-        }
       </ul>
     </div>
   </nav>

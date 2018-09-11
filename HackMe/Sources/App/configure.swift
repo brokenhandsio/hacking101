@@ -58,6 +58,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     migrations.add(model: Message.self, database: .sqlite)
     migrations.add(model: User.self, database: .sqlite)
     migrations.add(migration: DefaultUser.self, database: .sqlite)
+    migrations.add(migration: SecondUser.self, database: .sqlite)
     services.register(migrations)
 
 }

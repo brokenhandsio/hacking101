@@ -47,5 +47,23 @@ struct DefaultUser: Migration {
     }
 }
 
+struct SecondUser: Migration {
+
+    typealias Database = SQLiteDatabase
+
+    static func prepare(on connection: SQLiteConnection) -> Future<Void> {
+        let password = try? BCrypt.hash("password")
+        guard let hashedPassword = password else {
+            fatalError("Failed to create admin user")
+        }
+        let user = User(name: "User2", username: "user2", password: hashedPassword, bankBalance: 10000)
+        return user.save(on: connection).transform(to: ())
+    }
+
+    static func revert(on connection: SQLiteConnection) -> Future<Void> {
+        return Future.map(on: connection) {}
+    }
+}
+
 extension User: PasswordAuthenticatable {}
 extension User: SessionAuthenticatable {}
