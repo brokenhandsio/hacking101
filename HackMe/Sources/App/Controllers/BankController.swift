@@ -11,8 +11,9 @@ struct BankController: RouteCollection {
         return try req.view().render("transfer", TransferContext())
     }
 
-    func transferPostHandler(_ req: Request, data: TransferData) throws -> Future<Response> {
-        return req.future(req.redirect(to: "/transfer"))
+    func transferPostHandler(_ req: Request, data: TransferData) throws -> Future<View> {
+        let context = TransferCompleteContext(amount: data.amount, toAccount: data.toAccount)
+        return try req.view().render("transferComplete", context)
     }
 }
 
@@ -23,4 +24,10 @@ struct TransferContext: Encodable {
 struct TransferData: Content {
     let toAccount: String
     let amount: Int
+}
+
+struct TransferCompleteContext: Encodable {
+    let title = "Transfer Complete"
+    let amount: Int
+    let toAccount: String
 }
