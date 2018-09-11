@@ -8,10 +8,12 @@ struct WebsiteController: RouteCollection {
     }
 
     func indexHandler(_ req: Request) throws -> Future<View> {
+        try ensureSessionSet(on: req)
         return try req.view().render("index", IndexContext())
     }
 
     func xssHandler(_ req: Request) throws -> Future<View> {
+        try ensureSessionSet(on: req)
         let messages = Message.query(on: req).all()
         return try req.view().render("xss", XSSContext(messages: messages))
     }
@@ -21,6 +23,9 @@ struct WebsiteController: RouteCollection {
         return message.save(on: req).transform(to: req.redirect(to: "/xss"))
     }
 
+    func ensureSessionSet(on req: Request) throws {
+        try req.session()["session"] = "true"
+    }
     
 }
 
