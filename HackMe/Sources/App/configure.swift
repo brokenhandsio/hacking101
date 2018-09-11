@@ -21,7 +21,15 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     leafTagConfig.use(Raw(), as: "raw")
     services.register(leafTagConfig)
 
+    // Sessions Config
     config.prefer(MemoryKeyedCache.self, for: KeyedCache.self)
+    services.register { container -> SessionsConfig in
+        return SessionsConfig(cookieName: "hacking-session") { cookieName -> HTTPCookieValue in
+            return HTTPCookieValue(string: cookieName,
+                                   isHTTPOnly: false,
+                                   sameSite: nil)
+        }
+    }
 
     /// Security headers
     let cspValue = "default-src * 'unsafe-inline'"
