@@ -1,5 +1,5 @@
 #set("content") {
-<h1>Login To The Bank</h1>
+<h1>Login</h1>
 
 <form method="post">
   <div class="form-group">

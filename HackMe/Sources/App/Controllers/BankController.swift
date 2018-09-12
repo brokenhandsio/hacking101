@@ -8,7 +8,7 @@ struct BankController: RouteCollection {
         let routeCollection = authSessionRoutes.grouped("bank")
 
         routeCollection.get("login", use: loginHandler)
-        routeCollection.post(UserData.self, at: "login", use: loginPostHandler)
+        routeCollection.post(UserLoginData.self, at: "login", use: loginPostHandler)
 
         let protectedRoutes = routeCollection.grouped(RedirectMiddleware<User>(path: "/bank/login"))
         protectedRoutes.get("logout", use: logoutHandler)
@@ -17,11 +17,11 @@ struct BankController: RouteCollection {
     }
 
     func loginHandler(_ req: Request) throws -> Future<View> {
-        return try req.view().render("login", LoginContext())
+        return try req.view().render("login", ["title": "admin"])
     }
 
-    func loginPostHandler(_ req: Request, userData: UserData) throws -> Future<Response> {
-        return User.authenticate(username: userData.username, password: userData.password, using: BCryptDigest(), on: req).map(to: Response.self) { user in
+    func loginPostHandler(_ req: Request, userLoginData: UserLoginData) throws -> Future<Response> {
+        return User.authenticate(username: userLoginData.username, password: userLoginData.password, using: BCryptDigest(), on: req).map(to: Response.self) { user in
             guard let user = user else {
                 return req.redirect(to: "/bank/login")
             }
@@ -67,13 +67,4 @@ struct TransferCompleteContext: Encodable {
     let amount: Int
     let toAccount: String
     let newBalance: Int
-}
-
-struct LoginContext: Encodable {
-    let title = "Login"
-}
-
-struct UserData: Content {
-    let username: String
-    let password: String
 }

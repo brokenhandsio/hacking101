@@ -9,12 +9,14 @@ final class User: Codable {
     var username: String
     var password: String
     var bankBalance: Int
+    var admin: Bool
 
-    init(name: String, username: String, password: String, bankBalance: Int) {
+    init(name: String, username: String, password: String, bankBalance: Int, admin: Bool) {
         self.name = name
         self.username = username
         self.password = password
         self.bankBalance = bankBalance
+        self.admin = admin
     }
 }
 
@@ -38,7 +40,7 @@ struct DefaultUser: Migration {
         guard let hashedPassword = password else {
             fatalError("Failed to create admin user")
         }
-        let user = User(name: "User", username: "user", password: hashedPassword, bankBalance: 10000)
+        let user = User(name: "User", username: "user", password: hashedPassword, bankBalance: 10000, admin: false)
         return user.save(on: connection).transform(to: ())
     }
 
@@ -56,7 +58,7 @@ struct SecondUser: Migration {
         guard let hashedPassword = password else {
             fatalError("Failed to create admin user")
         }
-        let user = User(name: "User2", username: "user2", password: hashedPassword, bankBalance: 10000)
+        let user = User(name: "User2", username: "user2", password: hashedPassword, bankBalance: 10000, admin: true)
         return user.save(on: connection).transform(to: ())
     }
 
@@ -67,3 +69,8 @@ struct SecondUser: Migration {
 
 extension User: PasswordAuthenticatable {}
 extension User: SessionAuthenticatable {}
+
+struct UserLoginData: Content {
+    let username: String
+    let password: String
+}
