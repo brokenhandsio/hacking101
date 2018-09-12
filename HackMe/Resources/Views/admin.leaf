@@ -1,0 +1,33 @@
+#set("content") {
+<h1>Site Admin</h1>
+
+<p>Here you can perform various administrator tasks if you are an admin.</p>
+
+#if(isAdmin) {
+  <div class="alert alert-success" role="alert">
+  You are an admin!
+</div>
+} else {
+  <div class="alert alert-danger" role="alert">
+    You are not an admin!
+  </div>
+}
+
+<a href="/admin/logout" class="btn btn-primary mt-3">Logout</a>
+
+<h2 class="mt-3">Cookie Action</h2>
+<form method="post" action="/admin/cookie">
+  <button type="submit" class="btn btn-primary">Perform Admin Action</button>
+</form>
+
+<h2 class="mt-3">Query Action</h2>
+<form method="get" action="/admin/query">
+  #if(isAdmin) {
+    <input type="hidden" value="true" name="admin">
+  }
+  <button type="submit" class="btn btn-primary">Perform Admin Action</button>
+</form>
+
+}
+
+#embed("base")
