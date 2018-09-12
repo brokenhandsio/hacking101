@@ -1,6 +1,12 @@
 #set("content") {
 
   <h1>Hacking 101</h1>
+
+  <img src="/hacker.jpg" alt="Hacker" style="height: 300px;" class="hacker-image">
+
+  <p>Learn the basics of hacking and securing websites</p>
+
+  <p>Choose an option above</p>
 }
 
 #embed("base")
